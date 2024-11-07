@@ -7,8 +7,6 @@ const superWeapons = [{name: "Livre", value: 0}, {name: "Cano Duplo", value: 1},
 const classes = [{name: "Livre", nv1:0, nv2:0, nv3:0},{name: "Zoom Automático da Pistola", nv1: 1, nv2: 2}, {name: "Especialista em Explosões", nv1: 1, nv2: 3}, {name: "Reanimador", nv1: 1, nv2: 3, nv3:4}, {name: "Lutador", nv1: 2, nv2: 3}, {name: "Furtividade", nv1: 2, nv2:4, nv3: 5}, {name: "Ouvidos Afiados", nv1: 1, nv2: 2, nv3: 3}, {name:"Estrategista", nv1: 1, nv2: 4, nv3: 5}, {name:"Olhos de Águia" , nv1: 2, nv2: 3, nv3: 4}, {name:"Criador" , nv1: 2, nv2: 4, nv3: 6}, {name:"Primeiros Socorros" , nv1: 2, nv2: 4, nv3: 6}, {name:"Atirador Afiado" , nv1: 2, nv2: 4, nv3: 5}, {name:"Maratonista" , nv1: 1, nv2: 3}, {name:"Coletor" , nv1: 3, nv2: 5}, {name:"Carrasco" , nv1: 1, nv2: 3, nv3: 4}, {name:"Explorador" , nv1: 2, nv2: 4, nv3: 5}, {name:"Marcador de Dano" , nv1: 2, nv2: 4}, {name:"Cosciência" , nv1: 1, nv2: 3}, {name:"Coragem" , nv1: 1, nv2: 3}, {name:"Pistoleiro" , nv1: 2, nv2: 4}, {name:"Especialista em Bombas" , nv1: 2, nv2: 3, nv3: 5}, {name:"Agilidade" , nv1: 2, nv2: 4}, {name:"Lobo Solitário" , nv1: 2, nv2: 3}, {name:"Segunda Chance" , nv1: 1, nv2: 2}, {name:"Polivalente" , nv1: 5, nv2: 10}, {name:"Sortudo" , nv1: 2, nv2: 3, nv3: 4}, {name:"Eficiência Letal" , nv1: 2, nv2: 3}];
 
 
-let points = 0;
-
 function randomClasses () {
     let classesPoints = 0
     let i = 0
@@ -50,14 +48,11 @@ function randomClasses () {
         nvl = parseInt(Math.random() * (3 - 1 + 1)) + 1;
         i++
     }
-    console.log()
-    console.log("Classes")
-    arrayClass.forEach( (item) => {
-        console.log(item.name)
-    })
-    console.log('------------------')
 
-    return classesPoints
+    return {
+        points: classesPoints,
+        result: arrayClass
+    }
 }
 
 function randomSuperWeapons () {
@@ -67,12 +62,11 @@ function randomSuperWeapons () {
     let superWeapon = superWeapons[randomSuperWeapon]
 
     superWeaponPoints += superWeapon.value
-    console.log()
-    console.log("Armas Especiais")
-    console.log(superWeapon.name)
-    console.log('------------------')
 
-    return superWeaponPoints
+    return {
+        points: superWeaponPoints,
+        result: superWeapon.name
+    }
 }
 
 function randomLongWeapon () {
@@ -81,27 +75,26 @@ function randomLongWeapon () {
     let randomLongWeapon = parseInt(Math.random() * (sizeLongWeapons - 0) + 0)
     let longWeapon = longWeapons[randomLongWeapon]
 
-    console.log()
-    console.log("Arma Longa")
-
     if (longWeapon.silencer !== undefined){
         const silencer = Math.random() < 0.5;
 
         if (silencer) {
             longWeaponPoints += longWeapon.silencer
-            console.log(`${longWeapon.name} + Silenciador`)
+            longWeapon = `${longWeapon.name} + Silenciador`
         } else {
             longWeaponPoints += longWeapon.value
-            console.log(`${longWeapon.name}`)
+            longWeapon = `${longWeapon.name}`
         }
 
     } else {
         longWeaponPoints += longWeapon.value
-        console.log(longWeapon.name)
+        longWeapon = `${longWeapon.name}`
     }
-    console.log('------------------')
 
-    return longWeaponPoints
+    return {
+        points: longWeaponPoints,
+        result: longWeapon
+    }
 }
 
 function randomTinyWeapon () {
@@ -110,31 +103,60 @@ function randomTinyWeapon () {
     let randomNumber = parseInt(Math.random() * (sizeTinyWeapons - 0) + 0)
     let tinyWeapon = tinyWeapons[randomNumber]
 
-    console.log()
-    console.log("Arma Curta")
-
     if (tinyWeapon.silencer !== undefined){
         const silencer = Math.random() < 0.5;
 
         if (silencer) {
             tinyWeaponPoints += tinyWeapon.silencer
-            console.log(`${tinyWeapon.name} + Silenciador`)
+            tinyWeapon = `${tinyWeapon.name} + Silenciador`
         } else {
             tinyWeaponPoints += tinyWeapon.value
-            console.log(`${tinyWeapon.name}`)   
+            tinyWeapon = `${tinyWeapon.name}`
         }
 
     } else {
-        console.log(tinyWeapon.name)
+        tinyWeapon = `${tinyWeapon.name}`
     }
-    console.log('------------------')
 
-    return tinyWeaponPoints
+    return {
+        points: tinyWeaponPoints,
+        result: tinyWeapon
+    }
 }
+
+//randomTinyWeapon, randomLongWeapon, randomClasses, randomSuperWeapons
+
 let arrayFunctionsGame = [randomTinyWeapon, randomLongWeapon, randomClasses, randomSuperWeapons]
+let points = 0
+let finalResultClass = []
+
 
 for (c = 0 ; c < arrayFunctionsGame.length; c++) {
-    points += arrayFunctionsGame[c]()
+    objectFunction = arrayFunctionsGame[c]()
+    points += objectFunction.points
+    let itsLower = true
 
+    while (itsLower) {
+        if(points > 13){
+            points -= objectFunction.points
+
+            objectFunction = arrayFunctionsGame[c]()
+            points += objectFunction.points
+        } else {
+            itsLower = false
+        }
+    }
+
+    if (Array.isArray(objectFunction.result)) {
+        objectFunction.result.forEach((element, index) => {
+            finalResultClass.push(`${element.name} ${element[`nv${element.actualNvl}`]}`)
+        })
+
+    } else {
+        finalResultClass.push(`${objectFunction.result} ${objectFunction.points}`)
+    }
 }
-console.log(points)
+
+console.log(finalResultClass)
+
+console.log(`Total: ${points}`)
