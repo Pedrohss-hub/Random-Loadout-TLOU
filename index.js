@@ -1,5 +1,7 @@
 import { generateBuild } from "./algoritmo.js"
 
+let historicBuild = []
+
 const buttonGenerate = document.querySelector('.control-generate')
 const tinyWeapon = document.querySelector('.tinyWeapon')
 const longWeapon = document.querySelector('.longWeapon')
@@ -7,13 +9,72 @@ const skils = document.querySelectorAll('.skil')
 const specialWeapon = document.querySelector('.specialWeapon')
 const resultPoints = document.querySelector('.result-points')
 
-console.log(skils)
-
+let numberBuild
+let objectBuild
 
 buttonGenerate.addEventListener('click', async () => {
-    let objectBuild = await generateBuild()
+    objectBuild = await generateBuild()
+    historicBuild.push(objectBuild)
+    if (historicBuild.length > 8) {
+        historicBuild.shift()
+    }
 
-    objectBuild.result.forEach((e, i)=>{
+    displayBuild(objectBuild)
+    
+    numberBuild = historicBuild.length -1
+
+    console.log(numberBuild)
+
+    //Condição botão de voltar
+    if (numberBuild == 0 ) {
+        back.disabled = true
+    } else {
+        back.disabled = false
+    }
+    // Se não entender, use isso nos três botões (inclusive nesse): console.log(numberBuild, historicBuild.length-1)
+})
+
+const back = document.querySelector('.back')
+const next = document.querySelector('.next')
+
+back.addEventListener('click', () => {
+    numberBuild -= 1
+    displayBuild(historicBuild[numberBuild])
+
+    //Condição botão de voltar
+    if (numberBuild == 0 ) {
+        back.disabled = true
+    } else {
+        back.disabled = false
+    }
+    //Condição botão de avançar
+    if (numberBuild == historicBuild.length-1) {
+        next.disabled = true
+    } else {
+        next.disabled = false
+    }
+})
+
+next.addEventListener('click', () => {
+    numberBuild += 1
+    displayBuild(historicBuild[numberBuild])
+
+    //Condição botão de voltar
+    if (numberBuild == 0 ) {
+        back.disabled = true
+    } else {
+        back.disabled = false
+    }
+    //Condição botão de avançar
+    if (numberBuild == historicBuild.length-1) {
+        next.disabled = true
+    } else {
+        next.disabled = false
+    }
+})
+
+function displayBuild (build) {
+    build.result.forEach((e, i)=>{
         switch (i) {
             case 0:
                 tinyWeapon.textContent = e
@@ -47,6 +108,5 @@ buttonGenerate.addEventListener('click', async () => {
                 console.log()
         }
     })
-
     resultPoints.textContent = objectBuild.points
-})
+}
