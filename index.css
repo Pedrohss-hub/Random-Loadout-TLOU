@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+main {
+    padding: 15px 15px 0px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.section-title {
+    font-size: 20px;
+}
+
+.box-result {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.grid-skils {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 5px;
+}
+
+.result-points {
+    font-size: 20px;
+    font-weight: 800;
+    margin: auto;
+}
+
+.painel-controls {
+    position: fixed;
+    width: 100%;
+    bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.control {
+    min-width: 100px;
+    min-height: 35px;
+    cursor: pointer;
+}
+
+.control-generate {
+    min-width: 120px;
+    min-height: 50px;
+    cursor: pointer;
+}

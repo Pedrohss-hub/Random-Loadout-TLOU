@@ -1,43 +1,46 @@
 import { generateBuild } from "./algoritmo.js"
 
-document.addEventListener('click', async () => {
+const buttonGenerate = document.querySelector('.control-generate')
+const tinyWeapon = document.querySelector('.tinyWeapon')
+const longWeapon = document.querySelector('.longWeapon')
+const skils = document.querySelectorAll('.skil')
+const specialWeapon = document.querySelector('.specialWeapon')
+const resultPoints = document.querySelector('.result-points')
+
+console.log(skils)
+
+
+buttonGenerate.addEventListener('click', async () => {
     let objectBuild = await generateBuild()
 
     objectBuild.result.forEach((e, i)=>{
         switch (i) {
             case 0:
-                console.log('Arma Curta')
-                console.log(e)
-                console.log('--------------------')
+                tinyWeapon.textContent = e
             break;
 
             case 1:
-                console.log('Arma Longa')
-                console.log(e)
-                console.log('--------------------')
+                longWeapon.textContent = e
             break;
 
             case 2:
-                console.log('Habilidades')
-                console.log(e)
+                skils[0].textContent = e
             break;
 
             case 3:
-                console.log(e)
+                skils[1].textContent = e
             break;
 
             case 4:
-                console.log(e)
+                skils[2].textContent = e
             break;
 
             case 5:
-                console.log(e)
-                console.log('--------------------')
+                skils[3].textContent = e
             break;
 
             case 6:
-                console.log('Arma Especial')
-                console.log(e)
+                specialWeapon.textContent = e
             break;
 
             default:
@@ -45,5 +48,5 @@ document.addEventListener('click', async () => {
         }
     })
 
-    console.log(objectBuild.points)
+    resultPoints.textContent = objectBuild.points
 })
