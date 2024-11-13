@@ -1,6 +1,53 @@
 import { generateBuild } from "./algoritmo.js"
 
-let historicBuild = []
+const columnTinyWeapons = document.querySelector('.column-tinyWeapons')
+const columnLongWeapons = document.querySelector('.column-longWeapons')
+const columnSkilsWeapons = document.querySelector('.column-skils')
+const columnSpecialWeapons = document.querySelector('.column-specialWeapons')
+let itensJson
+
+(async () => {
+    const response = await fetch('./itens.json')
+    itensJson = await response.json()
+
+    let c
+
+    //Display das Armas Curtas
+    for (c = 0; itensJson.tinyWeapons.length - 1 > c; c++) {
+        create(itensJson.tinyWeapons[c].name, columnTinyWeapons)
+    }
+    //Display das Armas Longas
+    for (c = 0; itensJson.longWeapons.length - 1 > c; c++) {
+        create(itensJson.longWeapons[c].name, columnLongWeapons)
+    }
+    //Display das Habilidades
+    for (c = 0; itensJson.skils.length - 1 > c; c++) {
+        create(itensJson.skils[c].name, columnSkilsWeapons)
+    }
+    //Display das Armas Especiais
+    for (c = 0; itensJson.specialWeapons.length - 1 > c; c++) {
+        create(itensJson.specialWeapons[c].name, columnSpecialWeapons)
+    }
+
+    appendListener()
+
+})()
+
+function create(nameItenJson, column) {
+    let divBoxIten = document.createElement('div')
+    divBoxIten.classList.add('box-itens')
+
+    let nameIten = document.createElement('p')
+    nameIten.textContent = nameItenJson
+
+    let inputCheckBox = document.createElement('input')
+    inputCheckBox.type = 'checkbox'
+    inputCheckBox.checked = true
+
+    divBoxIten.appendChild(nameIten)
+    divBoxIten.appendChild(inputCheckBox)
+    column.appendChild(divBoxIten)
+}
 
 const buttonGenerate = document.querySelector('.control-generate')
 const tinyWeapon = document.querySelector('.tinyWeapon')
@@ -9,6 +56,7 @@ const skils = document.querySelectorAll('.skil')
 const specialWeapon = document.querySelector('.specialWeapon')
 const resultPoints = document.querySelector('.result-points')
 
+let historicBuild = []
 let numberBuild
 let objectBuild
 
@@ -109,4 +157,18 @@ function displayBuild (build) {
         }
     })
     resultPoints.textContent = objectBuild.points
+}
+
+function appendListener (){
+    let boxItens = document.querySelectorAll('.box-itens')
+    boxItens.forEach(e => {
+        e.children[1].addEventListener('click', () => {
+            if (e.children[1].checked) {
+                console.log(`Ligou ${e.children[0].textContent}`)
+
+            } else {
+                console.log(`Desligou ${e.children[0].textContent}`)
+            }
+        })
+    })
 }

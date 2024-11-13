@@ -1,0 +1,68 @@
+{
+    "tinyWeapons": [
+        {"name": "Revólver", "value": 0, "disabled": false}, 
+        {"name": "Pistola 9mm", "value": 0, "silencer": 1, "disabled": false},
+        {"name": "Escopeta Curta", "value": 1, "silencer": 3, "disabled": false}, 
+        {"name": "Enforcer", "value": 1, "silencer": 3, "disabled": false}, 
+        {"name": "Pistola de Sequência", "value": 1, "silencer": 3, "disabled": false}
+    ],
+
+    "longWeapons": [
+        {"name": "Livre", "value": 0, "disabled": false}, 
+        {"name": "Escopeta Tática", "value":3, "silencer": 5, "disabled": false}, 
+        {"name": "Rifle do Velho Oeste", "value": 2, "silencer": 4, "disabled": false}, 
+        {"name": "Semiautomática", "value": 2, "silencer": 4, "disabled": false}, 
+        {"name": "Rifle Automático", "value": 2, "silencer": 4, "disabled": false}, 
+        {"name": "Rifle de Sequência", "value": 2, "silencer": 4, "disabled": false}, 
+        {"name": "Espingarda", "value": 2, "silencer": 4, "disabled": false}, 
+        {"name": "Arco", "value": 3, "disabled": false}, 
+        {"name": "Semiautomático Com Mira", "value": 2, "silencer": 4, "disabled": false}, 
+        {"name": "Automático com Mira", "value": 2, "silencer": 4, "disabled": false}, 
+        {"name": "Sequência Com Mira", "value": 2, "silencer":4, "disabled": false}, 
+        {"name": "Rifle Variável", "value": 2, "silencer": 4, "disabled": false}
+    ],
+
+    "skils": [
+        {"name": "Livre", "nv1":0, "nv2":0, "nv3":0, "disabled": false}, 
+        {"name": "Zoom Automático da Pistola", "nv1": 1, "nv2": 2, "disabled": false}, 
+        {"name": "Especialista em Explosões", "nv1": 1, "nv2": 3, "disabled": false}, 
+        {"name": "Reanimador", "nv1": 1, "nv2": 3, "nv3":4, "disabled": false}, 
+        {"name": "Lutador", "nv1": 2, "nv2": 3, "disabled": false}, 
+        {"name": "Furtividade", "nv1": 2, "nv2":4, "nv3": 5, "disabled": false}, 
+        {"name": "Ouvidos Afiados", "nv1": 1, "nv2": 2, "nv3": 3, "disabled": false}, 
+        {"name":"Estrategista", "nv1": 1, "nv2": 4, "nv3": 5, "disabled": false}, 
+        {"name":"Olhos de Águia" , "nv1": 2, "nv2": 3, "nv3": 4, "disabled": false}, 
+        {"name":"Criador" , "nv1": 2, "nv2": 4, "nv3": 6, "disabled": false}, 
+        {"name":"Primeiros Socorros" , "nv1": 2, "nv2": 4, "nv3": 6, "disabled": false}, 
+        {"name":"Atirador Afiado" , "nv1": 2, "nv2": 4, "nv3": 5, "disabled": false}, 
+        {"name":"Maratonista" , "nv1": 1, "nv2": 3, "disabled": false}, 
+        {"name":"Coletor" , "nv1": 3, "nv2": 5, "disabled": false}, 
+        {"name":"Carrasco" , "nv1": 1, "nv2": 3, "nv3": 4, "disabled": false}, 
+        {"name":"Explorador" , "nv1": 2, "nv2": 4, "nv3": 5, "disabled": false}, 
+        {"name":"Marcador de Dano" , "nv1": 2, "nv2": 4, "disabled": false}, 
+        {"name":"Cosciência" , "nv1": 1, "nv2": 3, "disabled": false}, 
+        {"name":"Coragem" , "nv1": 1, "nv2": 3, "disabled": false}, 
+        {"name":"Pistoleiro" , "nv1": 2, "nv2": 4, "disabled": false}, 
+        {"name":"Especialista em Bombas" , "nv1": 2, "nv2": 3, "nv3": 5, "disabled": false}, 
+        {"name":"Agilidade" , "nv1": 2, "nv2": 4, "disabled": false}, 
+        {"name":"Lobo Solitário" , "nv1": 2, "nv2": 3, "disabled": false}, 
+        {"name":"Segunda Chance" , "nv1": 1, "nv2": 2, "disabled": false}, 
+        {"name":"Polivalente" , "nv1": 5, "nv2": 10, "disabled": false}, 
+        {"name":"Sortudo" , "nv1": 2, "nv2": 3, "nv3": 4, "disabled": false}, 
+        {"name":"Eficiência Letal" , "nv1": 2, "nv2": 3, "disabled": false}
+    ],
+
+    "specialWeapons": [
+        {"name": "Livre", "value": 0, "disabled": false}, 
+        {"name": "Cano Duplo", "value": 1, "disabled": false}, 
+        {"name": "El Diablo", "value": 3, "disabled": false}, 
+        {"name": "Rifle de Assalto", "value": 3, "disabled": false}, 
+        {"name": "Escopeta", "value": 4, "disabled": false}, 
+        {"name": "Rifle de Franco-Atirador", "value": 3, "disabled": false}, 
+        {"name": "Lança-Chamas", "value": 2, "disabled": false}, 
+        {"name": "Facão", "value": 2, "disabled": false}, 
+        {"name": "Specter", "value": 3, "disabled": false}, 
+        {"name": "Lançador", "value": 3, "disabled": false}, 
+        {"name": "Besta", "value": 3, "disabled": false}
+    ]
+, "disabled": false}
