@@ -1,26 +1,29 @@
-export async function generateBuild () {
-    let tinyWeapons, longWeapons, skils, specialWeapons
+let jsonItens, tinyWeapons, longWeapons, skils, specialWeapons
 
-try {
+export async function getItensJson() {
     const response = await fetch('./itens.json')
-    if (!response.ok) {
-        throw new Error('Falha ao carregar o arquivo jSON')
-    }
+    jsonItens = await response.json()
 
-    const data = await response.json()
+    return jsonItens
+}
+getItensJson()
 
-    //Atribuindo dados do JSON às variáveis
-    tinyWeapons = data.tinyWeapons
-    longWeapons = data.longWeapons
-    skils = data.skils
-    specialWeapons = data.specialWeapons
-        
+export async function generateBuild () {
+    tinyWeapons = jsonItens.tinyWeapons
+    longWeapons = jsonItens.longWeapons
+    skils = jsonItens.skils
+    specialWeapons = jsonItens.specialWeapons
 
     function randomTinyWeapon () {
         let tinyWeaponPoints = 0
         const sizeTinyWeapons = tinyWeapons.length - 1
         let randomNumber = parseInt(Math.random() * (sizeTinyWeapons - 0) + 0)
         let tinyWeapon = tinyWeapons[randomNumber]
+
+        while (tinyWeapon.disabled == true) {
+            randomNumber = parseInt(Math.random() * (sizeTinyWeapons - 0) + 0)
+            tinyWeapon = tinyWeapons[randomNumber]
+        }
 
         if (tinyWeapon.silencer !== undefined){
             const silencer = Math.random() < 0.5;
@@ -48,6 +51,11 @@ try {
         const sizeLongWeapons = longWeapons.length - 1
         let randomLongWeapon = parseInt(Math.random() * (sizeLongWeapons - 0) + 0)
         let longWeapon = longWeapons[randomLongWeapon]
+
+        while (longWeapon.disabled == true) {
+            randomLongWeapon = parseInt(Math.random() * (sizeLongWeapons - 0) + 0)
+            longWeapon = longWeapons[randomLongWeapon]
+        }
 
         if (longWeapon.silencer !== undefined){
             const silencer = Math.random() < 0.5;
@@ -78,9 +86,22 @@ try {
         let sizeSkils = skils.length - 1
         let randomSkils = parseInt(Math.random() * (sizeSkils - 0) + 0)
         let ownSkil = skils[randomSkils]
-        let nvl = parseInt(Math.random() * (3 - 1 + 1)) + 1;
+        let nvl = parseInt(Math.random() * (3 - 1 + 1)) + 1
+        let c = 0
 
         while (i < 4) {
+            while (ownSkil.disabled == true) {
+                randomSkils = parseInt(Math.random() * (sizeSkils - 0) + 0)
+                console.log(randomSkils)
+                ownSkil = skils[randomSkils]
+                console.log(`${c} Tentativa`)
+                while (ownSkil.disabled == true) {
+                randomSkils = parseInt(Math.random() * (sizeSkils - 0) + 0)
+                ownSkil = skils[randomSkils]
+                console.log(`${c} Tentativa`)
+            }
+            }
+
             if (ownSkil[`nv${nvl}`] == undefined) {
                 nvl -= 1
                 skilsPoints += ownSkil[`nv${nvl}`]
@@ -125,6 +146,11 @@ try {
         let randomSpecialWeapon = Math.floor(Math.random() * (sizeSpecialWeapons + 1));
         let specialWeapon = specialWeapons[randomSpecialWeapon]
 
+        while (specialWeapon.disabled == true) {
+            randomSpecialWeapon = parseInt(Math.random() * (sizeSkils - 0) + 0)
+            specialWeapon = specialWeapons[randomSpecialWeapon]
+        }
+
         specialWeaponPoints += specialWeapon.value
 
         return {
@@ -166,10 +192,6 @@ try {
     return {
         result: finalResultBuild,
         points: points,
+        jsonItens: jsonItens,
     }
-    
-
-} catch(error) {
-    console.error('Erro ao carregar o JSON:', error)
-}
-}
+} 

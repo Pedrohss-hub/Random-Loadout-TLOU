@@ -1,4 +1,5 @@
 import { generateBuild } from "./algoritmo.js"
+import { getItensJson } from "./algoritmo.js"
 
 const columnTinyWeapons = document.querySelector('.column-tinyWeapons')
 const columnLongWeapons = document.querySelector('.column-longWeapons')
@@ -7,33 +8,33 @@ const columnSpecialWeapons = document.querySelector('.column-specialWeapons')
 let itensJson
 
 (async () => {
-    const response = await fetch('./itens.json')
-    itensJson = await response.json()
+    itensJson = await getItensJson()
+    console.log(itensJson)
 
     let c
 
     //Display das Armas Curtas
     for (c = 0; itensJson.tinyWeapons.length - 1 > c; c++) {
-        create(itensJson.tinyWeapons[c].name, columnTinyWeapons)
+        displayItensPainel(itensJson.tinyWeapons[c].name, columnTinyWeapons)
     }
     //Display das Armas Longas
     for (c = 0; itensJson.longWeapons.length - 1 > c; c++) {
-        create(itensJson.longWeapons[c].name, columnLongWeapons)
+        displayItensPainel(itensJson.longWeapons[c].name, columnLongWeapons)
     }
     //Display das Habilidades
     for (c = 0; itensJson.skils.length - 1 > c; c++) {
-        create(itensJson.skils[c].name, columnSkilsWeapons)
+        displayItensPainel(itensJson.skils[c].name, columnSkilsWeapons)
     }
     //Display das Armas Especiais
     for (c = 0; itensJson.specialWeapons.length - 1 > c; c++) {
-        create(itensJson.specialWeapons[c].name, columnSpecialWeapons)
+        displayItensPainel(itensJson.specialWeapons[c].name, columnSpecialWeapons)
     }
 
     appendListener()
 
 })()
 
-function create(nameItenJson, column) {
+function displayItensPainel(nameItenJson, column) {
     let divBoxIten = document.createElement('div')
     divBoxIten.classList.add('box-itens')
 
@@ -70,8 +71,6 @@ buttonGenerate.addEventListener('click', async () => {
     displayBuild(objectBuild)
     
     numberBuild = historicBuild.length -1
-
-    console.log(numberBuild)
 
     //Condição botão de voltar
     if (numberBuild == 0 ) {
@@ -160,14 +159,36 @@ function displayBuild (build) {
 }
 
 function appendListener (){
+    let listItens
     let boxItens = document.querySelectorAll('.box-itens')
     boxItens.forEach(e => {
         e.children[1].addEventListener('click', () => {
             if (e.children[1].checked) {
-                console.log(`Ligou ${e.children[0].textContent}`)
+                listItens = itensJson[e.parentElement.classList[1]]
+                for (let i = 0; listItens.length -1 > i; i++){
+                    if (listItens[i].name == e.children[0].textContent) {
+                        listItens[i].disabled = false
+                        console.log(listItens[i])
+
+                
+                        i = listItens.length
+                    }
+                }
+
 
             } else {
-                console.log(`Desligou ${e.children[0].textContent}`)
+                console.log('Desligou')
+                listItens = itensJson[e.parentElement.classList[1]]
+                for (let i = 0; listItens.length -1 > i; i++){
+                    console.log(i)
+                    if (listItens[i].name == e.children[0].textContent) {
+                        listItens[i].disabled = true
+                        console.log(listItens[i])
+                        console.log('Achou')
+
+                        i = listItens.length
+                    }
+                }
             }
         })
     })
